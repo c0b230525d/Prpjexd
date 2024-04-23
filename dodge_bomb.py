@@ -2,6 +2,7 @@ import os
 import random
 import sys
 import pygame as pg
+import time
 
 
 WIDTH, HEIGHT = 1100, 600
@@ -23,6 +24,29 @@ def check_bound(obj_rct:pg.Rect) -> tuple[bool, bool]:
     if obj_rct.top < 0 or HEIGHT < obj_rct.bottom:
         tate = False
     return yoko, tate
+
+def game_over(screen):
+    blackout = pg.Surface((WIDTH, HEIGHT))
+    pg.draw.rect(blackout, (0, 0, 0), pg.Rect(0, 0, WIDTH, HEIGHT))
+    blackout.set_alpha(128) 
+    screen.blit(blackout, [0, 0])
+    pg.display.update()
+
+    img2 = pg.image.load("fig/8.png")
+    screen.blit(img2, [360, 270])
+    pg.display.update()
+    screen.blit(img2, [690, 265])
+    pg.display.update()
+
+
+    fonto = pg.font.SysFont(None, 64)
+    txt = fonto.render("Game Over",
+            True, (255, 255, 255))
+    txt_rect = txt.get_rect(center = (WIDTH/2, HEIGHT/2))
+    screen.blit(txt, txt_rect)
+    pg.display.update()
+    
+    time.sleep(5)
 
 
 def main():
@@ -47,6 +71,7 @@ def main():
                 return
         if kk_rct.colliderect(bd_rct):  
             print("Game over")
+            game_over(screen)
             return
         screen.blit(bg_img, [0, 0]) 
 
