@@ -33,9 +33,9 @@ def game_over(screen):
     pg.display.update()
 
     img2 = pg.image.load("fig/8.png")
-    screen.blit(img2, [360, 270])
+    screen.blit(img2, [WIDTH/2-180, HEIGHT/2-40])
     pg.display.update()
-    screen.blit(img2, [690, 265])
+    screen.blit(img2, [WIDTH/2+135, HEIGHT/2-40])
     pg.display.update()
 
 
